@@ -5,11 +5,12 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_tbl")
-public class users {
+public class Users {
 
     @Id
     @GeneratedValue
     private Long id;
+
     @Column(unique = true)
     private String email;
     private String password;
@@ -22,9 +23,9 @@ public class users {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public users() {}
+    public Users() {}
 
-    public users(String email, String password, String name, String cover) {
+    public Users(String email, String password, String name, String cover) {
         this.email = email;
         this.password = password;
         this.name = name;
