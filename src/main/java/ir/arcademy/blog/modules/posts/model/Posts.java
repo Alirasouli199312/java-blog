@@ -1,30 +1,33 @@
-package ir.arcademy.blog.modules.users.model;
+package ir.arcademy.blog.modules.posts.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import ir.arcademy.blog.modules.posts.model.Posts;
+import ir.arcademy.blog.modules.users.model.Users;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "user_tbl")
+@Table(name = "posts_tbl")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Users {
+public class Posts {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(unique = true)
-    private String email;
-    private String password;
-    private String name;
+    private String title;
+    private String body;
     private String cover;
 
-    @OneToMany(mappedBy = "users")
-    private List<Posts> posts;
+    @ManyToOne
+    @JoinColumn(name = "user_fk")
+    private Users users;
+
+    @ManyToMany
+    @JoinTable(name = "post_category")
+    private List<Category> categories;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -32,12 +35,13 @@ public class Users {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Users() {}
+    public Posts() {
 
-    public Users(String email, String password, String name, String cover) {
-        this.email = email;
-        this.password = password;
-        this.name = name;
+    }
+
+    public Posts(String title, String body, String cover) {
+        this.title = title;
+        this.body = body;
         this.cover = cover;
     }
 
@@ -49,28 +53,20 @@ public class Users {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTitle() {
+        return title;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getPassword() {
-        return password;
+    public String getBody() {
+        return body;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getCover() {
@@ -81,12 +77,20 @@ public class Users {
         this.cover = cover;
     }
 
-    public List<Posts> getPosts() {
-        return posts;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setPosts(List<Posts> posts) {
-        this.posts = posts;
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 
     public LocalDateTime getCreatedAt() {
