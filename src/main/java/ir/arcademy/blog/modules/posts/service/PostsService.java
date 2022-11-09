@@ -2,10 +2,9 @@ package ir.arcademy.blog.modules.posts.service;
 
 import ir.arcademy.blog.modules.posts.model.Posts;
 import ir.arcademy.blog.modules.posts.repository.PostsRepository;
-import ir.arcademy.blog.modules.users.model.Users;
-import ir.arcademy.blog.modules.users.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +18,7 @@ public class PostsService {
         this.postsRepository = postsRepository;
     }
 
+    @Transactional
     public Posts registerPost(Posts posts) {
         return this.postsRepository.save(posts);
     }

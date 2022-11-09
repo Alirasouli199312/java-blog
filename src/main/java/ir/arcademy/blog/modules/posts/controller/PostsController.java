@@ -40,7 +40,7 @@ public class PostsController {
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.POST)
     public Posts registerPost(@RequestBody Posts posts) {
-        return postsService.registerPost(posts);
+    return postsService.registerPost(posts);
     }
 
 
