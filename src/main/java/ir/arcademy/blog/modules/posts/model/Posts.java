@@ -43,6 +43,11 @@ public class Posts {
 
     }
 
+    public Posts(String title, String body) {
+        this.title = title;
+        this.body = body;
+    }
+
     public Posts(String title, String body, String cover) {
         this.title = title;
         this.body = body;
